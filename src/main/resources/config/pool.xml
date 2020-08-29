@@ -1,0 +1,14 @@
+<database>
+    <bean id="datasource" class="com.jdbc.pool.DBConfig">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://112.74.76.80:3306/cooking"/>
+        <property name="userName" value="root"/>
+        <property name="password" value="123456"/>
+        <property name="maxActive" value="10"/>
+        <property name="initialSize" value="5"/>
+        <property name="minActive" value="3"/>
+        <property name="idleTimeOut" value="2000"/>
+        <property name="maxWaitTime" value="2000"/>
+    </bean>
+</database>

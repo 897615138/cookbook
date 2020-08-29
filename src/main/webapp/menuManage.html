@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建你的菜谱</title>
+    <link rel="stylesheet" href="./static/css/ace.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/css/commons.css">
+    <link rel="stylesheet" href="./static/css/bootoast.css">
+    <link rel="shortcut icon" href="./static/images/kaola.ico"  type="image/x-icon"/>
+
+    <style>
+        body{
+            background-image: url(static/images/bg3.jpg);
+        }
+        label {
+            font-family: Arial,serif;
+            font-size: 13px;
+            color: #333333;
+            margin-right: 30px;
+        }
+
+        .input {
+            text-align: center;
+            height: 37px;
+            color: #AAAAAA;
+        }
+
+        .select {
+            text-align: left;
+            color: #000000;
+        }
+
+        #submit, #reset {
+            width: 148px;
+            height: 59px;
+            border-radius: 40px;
+            background-color: #CAF982;
+            border: 0;
+            font-family: FontAwesome,serif;
+            font-size: 20px;
+            color: #7F7F7F;
+            margin-left: 20px;
+        }
+
+        #back {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            background: url('static/images/goToTop.png') no-repeat;
+            cursor: pointer;
+            right: 85px;
+            bottom: 10px;
+            z-index: 90;
+        }
+
+        label{
+            font-size: 20px;
+        }
+    </style>
+    <script src="./static/js/toastr.js"></script>
+
+</head>
+
+<body>
+
+<div>
+    <!--导航栏-->
+    <div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 1460px;margin: auto;background-color: #c7f4b7;">
+        <!--左边的首页等—-->
+        <ul class="nav navbar-nav menulist navbar-left"  >
+            <li><a href="index">首页</a></li>
+            <li><a href="sortcook">菜单</a></li>
+        </ul>
+        <!--是否登录-->
+        <ul class="nav navbar-nav navbar-right " id="isLogin" style="width:10%;">
+        </ul>
+
+        <form  class="navbar-form navbar-right" role="search">
+            <div class="form-group" style="height: 100%;margin-top: 0">
+                <label>
+                    <input type="text" placeholder="请输入您要搜索的菜谱名称"  name="dishName" class="form-control searchinput" style="width: 224px;margin-top: 2px; border-radius: 15px!important;"/>
+                </label>
+                <a href="javascript:void (0)" style="color: #000;" class="searchimg">
+                    <img src="./static/images/icons/搜索.svg" alt="" class="searchimg tt"  >
+                </a>
+                <!--                <input type="button" class="bjsearch searchimg" value="搜索">-->
+
+            </div>
+        </form>
+    </div>
+
+    <div class="container" style="    margin-top: 91px;">
+        <div class="row" style="height: 500px;">
+            <div style="margin-bottom: 200px">
+                <form class="form-horizontal" role="form" id="manageForm">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label for="title" class="col-sm-1 control-label">标题</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control input" id="title" placeholder="请输入标题（20字以内）" maxlength="20" name="dishName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label for="description" class="col-sm-1 control-label">简介</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control input" id="description" placeholder="请输入简介（30字以内）"
+                                   maxlength="30" name="dishIntro">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-1 control-label">正文</label>
+                        <div class="col-sm-6">
+                            <!-- 加载编辑器的容器 -->
+                            <script id="container" name="dishText" type="text/plain" style="height: 300px" placeholder="请输入菜谱详情~第一张图是封面哦~并且至少输入50字的心得体会~">
+
+                            </script>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label for="tag" class="col-sm-1 control-label">标签</label>
+                        <div class="col-sm-6">
+                            <select class="form-control input select" id="tag" name="tagId">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 50px">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-3 row" style="margin-left: -43px; width: 500px;">
+                            <input type="submit" value="提交" class="button" id="submit">
+                            <input type="reset" value="清空" class="button" id="reset">
+                        </div>
+                    </div>
+                    <div>
+                        <div id="back">
+                            <a href="javascript:" title="回到顶部"></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="row" style="height: 100px;">
+            <div class="footer" style="bottom: 0">
+                <div class="row">
+                    <div class="col-md-1 col-sm-3" style="height: 100px;"></div>
+                    <div class="col-md-1 col-sm-3" style="height: 100px;width: 100px">
+                        <img src="./static/images/logo.png" alt="这是一个logo" style=" width: 74px; height: 88px; margin-top: 28px;margin-left: 19px">
+                    </div>
+                    <div class="col-md-5 col-sm-6" style="height: 100px;">
+                        <p class="footer_link">网站首页&nbsp;&nbsp;&nbsp;帮助中心&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;客户服务&nbsp;&nbsp;&nbsp;隐私政策
+                            &nbsp;&nbsp;&nbsp;意见反馈</p>
+                        <p>Copyright © 2020SUMMER All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="height: 100px;"></div>
+
+                    <div class="col-md-3 col-sm-4" style="height: 100px;    margin-top: 24px;">
+                        <img class="pic qq" src="./static/images/share/QQ.svg" alt="QQ">
+                        <img class="pic" src="./static/images/share/wechat.svg" alt="wechat">
+                        <img class="pic" src="./static/images/share/blog.svg" alt="blog">
+                    </div>
+                    <div class="col-md-2 col-sm-1"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 主体 -->
+
+    <!--</div>-->
+ </div>
+
+<script src="./static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script src="./static/ueditor/ueditor.parse.js"></script>
+<!-- 配置文件 -->
+<script type="text/javascript" src="./static/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="./static/ueditor/ueditor.all.js"></script>
+<script  src="./static/js/bootoast.js"></script>
+<script  src="./static/js/nav.js"></script>
+<script>
+    (function () {
+//实例化编辑器
+        const ue = UE.getEditor('container', {
+            // autoHeightEnabled: false,
+            autoFloatEnabled: false,
+            elementPathEnabled: false,
+            maximumWords: 600,
+        });
+
+        //菜系标签显示    自执行函数
+        +function init() {
+            let curr = '';
+            $.ajax({
+                url: 'tags/list',
+                method: 'POST',
+                dataType: 'JSON',
+                success(data) {
+                    data.data.forEach(el => {
+                        curr += `<option value="${el.tagId}">${el.tagName}</option>`;
+                        $('#tag').empty().html(curr)
+                    })
+                }
+            })
+        }();
+
+        //提交按钮事件
+        $('#submit').click(function () {
+            let formData = $('#manageForm').serialize();//获取表单数据
+            //获取当前用户id
+            $.ajax({
+            url: 'ueditor/uploadImage',
+                data: formData,
+                method: 'POST',
+                dataType: 'JSON',
+                success(data) {
+                if (data.result) {//提交成功，将表单中的内容清除
+                    $('#title').val('');
+                    $('#description').val('');
+                    UE.getEditor("container").setContent("")
+                    $('#picAddress').val('')
+                }
+            }
+        });
+
+            if (UE.getEditor("container").getContentTxt().length<50||UE.getEditor("container").getContent().search("img src=")<0)
+            {
+                toast("至少输入50字哦~还要一张图片作为封面")
+            }else{
+            $.ajax({
+                url: 'dishes/insert',
+                data: formData,
+                method: 'POST',
+                dataType: 'JSON',
+                success(data) {
+                    //console.log(data)
+                    if (data.result) {//提交成功，将表单中的内容清除
+                        toast(data.msg, 'success');
+                        setTimeout(function () {
+                            window.location.href="userPage"
+                        },3000)
+                        $('#title').val('');
+                        $('#description').val('');
+                        UE.getEditor("container").setContent("")
+                        $('#picAddress').val('')
+
+                    } else {
+                        toast(data.msg, 'error')
+                    }
+                }
+            });}
+            return false
+        });
+
+        //提交按钮事件
+        $('#reset').click(function () {
+            $('#title').val('');
+            $('#description').val('');
+            UE.getEditor("container").setContent("")
+            $('#picAddress').val('')
+            return false
+        });
+
+        function toast(message, type) {
+            bootoast.toast({
+                message: message,
+                type: type,
+                position: 'top-center',
+                icon: null,
+                timeout: 1,
+                animationDuration: 0,
+                dismissible: true
+            });
+        }
+        //回到顶部
+        $(document).ready(function () {
+            //首先将#btn隐藏
+            $("#back").hide();
+            //当滚动条的位置处于距顶部50像素以下时，跳转链接出现，否则消失
+            $(function () {
+                $(window).scroll(function () {
+                    if ($(window).scrollTop() > 50) {
+                        $("#back").fadeIn(200);
+                    } else {
+                        $("#back").fadeOut(200);
+                    }
+                });
+                //当点击跳转链接后，回到页面顶部位置
+                $("#back").click(function () {
+                    $('body,html').animate({
+                            scrollTop: 0
+                        }, 500);
+                    return false;
+                });
+            });
+        });
+    })()
+</script>
+</body>
+
+</html>

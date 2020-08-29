@@ -1,0 +1,16 @@
+.title{
+    background: url("../img/img-d73b61685984fb79a24e6de18a58ab84.jpg") ;
+    height: 200px;
+    background-size:100%;
+}
+.password-eye-div {
+    position: relative;
+}
+
+.password-eye-span {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: #ccc;
+}

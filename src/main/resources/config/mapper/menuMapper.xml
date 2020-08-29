@@ -1,0 +1,42 @@
+<mapper namespace="com.dao.IMenuInfoMapper">
+    <!--    wj  menu 映射-->
+    <!--对应的类与表的映射-->  <!--已测-->
+    <resultMap id="menuInfoMap" class="com.entity.MenuInfo">
+        <result property="menuId" column="menu_id" javaType="java.lang.String"/>
+        <result property="menuName" column="menu_name" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="menuDelete" column="menu_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <!-- 没有进行逻辑删除判断！-->
+    <select id="queryAllMenu" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        select * from menu_info where menu_delete=0
+    </select>
+    <!--找到用户的收藏夹 一个用户可以有多个收藏夹 wj-->
+    <select id="queryMenuByUser" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        select user_id,menu_id,menu_name,menu_delete from menu_info where user_id=#{userId} and menu_delete=0
+    </select>
+
+
+    <!--根据用户id删除收藏夹-->
+    <update id="deleteMenuById" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        update menu_info set menu_delete =1 where menu_id=#{menuId} and user_id=#{userId}
+    </update>
+
+    <!--根据用户id和菜谱名称创建收藏夹-->
+    <insert id="createMenuByIdAndName" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        insert into menu_info(user_id,menu_id,menu_name) select #{userId},#{menuId},#{menuName} where not exists(select user_id from menu_info
+        where user_id=#{userId} and menu_delete=0 GROUP BY user_id HAVING count(*)>5);
+    </insert>
+
+    <!--更新收藏夹名称-->
+    <update id="updateMenuTime" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        update menu_info set menu_name=#{menuName},menu_id=#{menuId},user_id=#{userId},menu_delete=0 where menu_id=#{menuId}
+    </update>
+
+    <!--通过menu_id拿到对应的menu信息-->
+    <select id="getMenuById" resultMap="menuInfoMap" parameterType="com.entity.MenuInfo">
+        select menu_id,menu_name,user_id,menu_delete from menu_info where menu_id=#{menuId}
+    </select>
+</mapper>

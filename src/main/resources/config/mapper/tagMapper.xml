@@ -1,0 +1,21 @@
+<mapper namespace="com.dao.ITagInfoMapper">
+    <!--对应的类与表的映射-->        <!--已测-->
+    <resultMap id="tagInfoMap" class="com.entity.TagInfo">
+        <result property="tagId" column="tag_id" javaType="java.lang.String"/>
+        <result property="tagName" column="tag_name" javaType="java.lang.String"/>
+        <result property="tagIntro" column="tag_intro" javaType="java.lang.String"/>
+        <result property="tagDelete" column="tag_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <!-- MapperStatement -->
+    <!--zp-->
+    <select id="queryAllTag" resultMap="tagInfoMap" parameterType="com.entity.TagInfo">
+        select tag_id,tag_name,tag_intro,tag_delete from tag_info where tag_delete=0;
+    </select>
+
+    <!-- 通过tagId 查询TagInfo对象  -->
+    <select id="queryTag" resultMap="tagInfoMap" parameterType="com.entity.TagInfo">
+        select tag_id,tag_name,tag_intro from tag_info where tag_id=#{tagId} and tag_delete=0
+    </select>
+</mapper>

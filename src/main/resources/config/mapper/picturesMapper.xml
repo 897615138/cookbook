@@ -1,0 +1,23 @@
+<mapper namespace="com.dao.IPicturesInfoMapper">
+    <!--wzf    pictures映射-->    <!--已测-->
+    <resultMap id="picturesInfoMap" class="com.entity.PicturesInfo">
+        <result property="dishId" column="dish_id" javaType="java.lang.String"/>
+        <result property="picAddress" column="pic_address" javaType="java.lang.String"/>
+    </resultMap>
+
+
+    <!--根据菜谱id查询图片地址-->
+    <select id="queryAllPictures" resultMap="picturesInfoMap" parameterType="com.entity.DishInfo">
+        select dish_id,pic_address from picture_info where dish_id=#{dishId}
+    </select>
+
+    <!--插入菜谱id-图片地址-->
+    <insert id="increasePictures" resultMap="picturesInfoMap" parameterType="com.entity.PicturesInfo">
+        insert into picture_info (dish_id,pic_address) values(#{dishId},#{picAddress})
+    </insert>
+
+    <!--删除图片-->
+    <delete id="deletePictures" resultMap="picturesInfoMap" parameterType="com.entity.PicturesInfo">
+        delete from picture_info where dish_id=#{dishId}
+    </delete>
+</mapper>

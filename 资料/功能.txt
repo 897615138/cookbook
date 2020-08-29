@@ -1,0 +1,217 @@
+用户：UserInfo
+users/getLoginUser 
+	请求：
+	响应：	ResultUtil
+			result是否成功
+			t userInfo 登陆的用户数据
+	方法：	获得登录用户信息(除密码以外) User getLoginUserInfo() 
+users/login
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	登录 根据用户名/邮箱和密码来登录       login(UserInfo userInfo)
+users/register
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	注册 根据用户提交的用户名，密码，邮箱（其他信息服务端给出） 
+		插入数据库 返回是否注册成功      register(UserInfo userInfo)
+users/search
+	请求：	id
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			t user
+	方法：	UserInfo  searchUser(String text)
+users/delete
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	注销用户       deleteUser(UserInfo userInfo)
+users/update
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	修改用户信息      updateUserInfo(UserInfo userInfo)
+users/update/picture
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	修改用户头像      updateUserPic(UserInfo userInfo)
+users/follow
+	请求：	两个UserInfo
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：FollowSystem 判断
+
+
+users/repeat/name
+	请求：	json对象
+	响应：	ResultUtil  
+			result是否重复 重复为false
+			msg 对应提示
+	方法：	     userRepeatCheckByName(UserInfo userInfo)
+users/repeat/mail
+	请求：	json对象
+	响应：	ResultUtil  
+			result是否重复 重复为false
+			msg 对应提示
+	方法：	     userRepeatCheckByMail(UserInfo userInfo)
+	  
+菜谱：DishInfo
+dishes/mydishes
+	请求:
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			list 如果有就返回相关菜谱List
+			page 
+	方法：	获得登录用户创建的菜谱  List<DishInfo> getLoginUserDishes()
+dishes/fuzzy
+	请求：	text
+		page
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			list 如果有就返回相关菜谱List
+	方法：	模糊查询 字符串 模糊查询所有包含输入的用户 List<DishInfo> searchDish(String text)
+dishes/sort/all
+	请求：	page
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			list 如果有就返回相关菜谱List 
+			page
+	方法：排序 List<DishInfo>sortAllDishes(Page)
+dishes/sort/tag	
+	请求：	page
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			list 如果有就返回相关菜谱List 
+			page
+	方法：排序 List<DishInfo> sortDishesByTag(Page)
+
+dishes/insert //待定 富文本编辑器
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：增加菜谱      addDish(DishInfo dishInfo)
+dishes/delete //待定 富文本编辑器
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：删除菜谱      deleteDish(DishInfo dishInfo)
+dishes/update //待定 富文本编辑器
+	请求：	formData
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：	修改菜谱      updateDish(DishInfo dishInfo)
+dishes/select/id
+	请求:	dishInfo
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			t 如果有就返回菜谱
+	方法：	通过菜谱id获得菜谱信息  DishInfo getDishById(DishInfo dishInfo)
+dishes/select/user
+	请求:	userinfo
+	响应：	ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			t 如果有就返回菜谱
+	方法：	通过user id获得菜谱信息 List getDishByUser(UserInfo userInfo)
+
+
+
+
+
+	
+收藏夹：MenuInfo
+menus/getLoginUserMenus 
+	请求：
+	响应：	ResultUtil
+			result是否成功
+			list menuInfo 登陆的用户的所有收藏夹list
+	方法：获得登陆用户的收藏夹List  List<MenuInfo> getLoginUserMenus()
+menus/getMenuContentByID
+	请求：	menuInfo
+		page
+	响应：	ResultUtil
+			result是否成功
+			list menuInfo 菜单list
+			page
+	方法：获得指定id的收藏夹的菜谱List  List<DishInfo> getMenuContentByID(MenuInfo menuInfo)
+menus/search
+	请求：	text
+		page
+	响应：ResultUtil 
+			result查询是否有结果 
+			msg 对应提示 
+			list 如果有就返回相关收藏夹List
+	方法：模糊查询 字符串 模糊查询所有包含输入的收藏夹 List<MenuInfo> searchMenu(String text)
+menus/insert
+	请求：	formdata(收藏夹名)
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：增加收藏夹      addMenu(MenuInfo menuInfo)
+menus/update/name
+	请求：	menuId menuName
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：更新收藏夹名称      updateMenuName(MenuInfo menuInfo)
+menus/update/content
+	请求：	formdata 
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：更新收藏夹收藏内容     updateMenu(MenuInfo menuInfo)
+menus/delete
+	请求：	formdata 
+	响应：	ResultUtil  
+			result是否成功 
+			msg 对应提示
+	方法：删除收藏夹     deleteMenu(MenuInfo menuInfo)
+
+菜系标签:TagInfo
+tags/list
+	请求：
+	响应：ResultUtil
+			result是否成功
+			list tagInfo 标签list
+	方法：获得所有标签List  List<TagInfo> getTags()
+评论：CommentInfo
+comments/get
+	请求：formdata(commentInfo userInfo)
+	响应：ResultUtil
+		result是否成功
+                        	msg 对应演示
+		list commentInfo 评论list
+	方法：获得所有CommentInfo的List  List<CommentInfo> getComments()
+
+
+
+
+
+人气 popular  不确定
+图片的按钮 点赞 和收藏  数据库层
+先查询出文章的点赞数和收藏数  在你进行点赞收藏的时候拿出来进行计算
+计算完再更新回去
+int selectDishLike(DishInfo dishInfo)
+int selectDishCollect(DishInfo dishInfo)
+     updateDishLike(DishInfo dishInfo)
+     updateDishCollect(DishInfo dishInfo)
+统计一个菜谱List的点赞总数（个人主页显示）
+int totalLike(List<DishInfo>  dishList)
+粉丝关注不确定

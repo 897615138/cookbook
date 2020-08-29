@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--系统内置 start-->
+    <script type="text/javascript" src="//qgt-style.oss-cn-hangzhou.aliyuncs.com/commonJSCSS/console.js"></script>
+    <!--系统内置 end-->
+    <meta charset="UTF-8">
+    <title>Daily UI #008 - 404 Page</title>
+    <link rel="stylesheet" href="static/css/404.css">
+
+</head>
+<body>
+
+<section class="wrapper">
+
+    <div class="container">
+
+        <div id="scene" class="scene" data-hover-only="false">
+
+
+            <div class="circle" data-depth="1.2"></div>
+
+            <div class="one" data-depth="0.9">
+                <div class="content">
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                </div>
+            </div>
+
+            <div class="two" data-depth="0.60">
+                <div class="content">
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                </div>
+            </div>
+
+            <div class="three" data-depth="0.40">
+                <div class="content">
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                    <span class="piece"></span>
+                </div>
+            </div>
+
+            <p class="p404" data-depth="0.50">404</p>
+            <p class="p404" data-depth="0.10">404</p>
+
+        </div>
+
+        <div class="text">
+            <article>
+                <p>Uh oh! 看起来你失去了联络. <br>请检查你的地址栏正确嘛？或者跳转首页</p>
+                <button onclick="window.location.href = 'index' ">我要跳转!</button>
+            </article>
+        </div>
+
+    </div>
+</section>
+<!-- partial -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    var scene = document.getElementById('scene')
+    var parallax = new Parallax(scene)
+</script>
+
+</body>
+</html>

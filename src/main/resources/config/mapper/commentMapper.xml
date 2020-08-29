@@ -1,0 +1,52 @@
+<mapper namespace="com.dao.ICommentInfoMapper">
+    <!-- wzf  对应的类与表的映射-->
+    <resultMap id="commentInfoMap" class="com.entity.CommentInfo">
+        <result property="commentId" column="comment_id" javaType="java.lang.String"/>
+        <result property="dishId" column="dish_id" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="commentText" column="comment_text" javaType="java.lang.String"/>
+        <result property="commentTime" column="comment_time" javaType="java.util.Date"/>
+        <result property="parentUserId" column="parent_user_id" javaType="java.lang.String"/>
+        <result property="commentDelete" column="comment_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <!--   找出所有的根评论(所有parent_user_id 为"0"的)-->
+    <select id="queryCommentByDishId" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">
+        select comment_id,dish_id,user_id,comment_text,comment_time,parent_user_id from comment_info where
+        dish_id=#{dishId} and parent_user_id="0" and
+        comment_delete=0 order by comment_time desc limit #{modPage},#{pageSize}
+    </select>
+    <!--   点击展开更多再发送一个请求 找出所有父子评论-->
+    <select id="queryCommentByCommentTime" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">
+        select comment_id,dish_id,user_id,comment_text,comment_time,parent_user_id from comment_info where
+        comment_id=#{commentId} and dish_id=#{dishId} and parent_user_id !="0"
+        order by comment_time desc limit #{modPage},#{pageSize}
+
+    </select>
+
+
+    <!--    &lt;!&ndash;    每个评论id为基础按照创建的时间进行排序&ndash;&gt;-->
+    <!--    <select id="queryCommentByCommentTime" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">-->
+    <!--        select comment_id,dish_id,user_id,comment_text,comment_time,parent_user_id from comment_info where-->
+    <!--        comment_id=#{commentId} and dish_id=#{dishId} order by comment_time asc limit #{modPage},#{pageSize}-->
+    <!--    </select>-->
+    <!--    总条数-->
+    <select id="queryCommentByDishIdAll" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">
+        select comment_id,dish_id from comment_info where dish_id=#{dishId} and comment_delete=0 order by
+        comment_time desc
+    </select>
+
+
+    <!--    &lt;!&ndash;   找一个评论底下素有个跟评论&ndash;&gt;-->
+    <!--    <select id="queryCommentByDishId" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">-->
+    <!--        select comment_id,dish_id from comment_info where dish_id=#{dishId} and comment_delete=0 order by-->
+    <!--        comment_time desc limit #{modPage},#{pageSize}-->
+    <!--    </select>-->
+    <!--    发表评论-->
+    <insert id="insertComment" resultMap="commentInfoMap" parameterType="com.entity.CommentInfo">
+        insert into comment_info(comment_id, dish_id, user_id, comment_text,comment_time,parent_user_id)
+        values(#{commentId},#{dishId},#{userId},#{commentText},#{commentTime},#{parentUserId});
+    </insert>
+
+</mapper>

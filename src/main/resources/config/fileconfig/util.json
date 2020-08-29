@@ -1,0 +1,29 @@
+{
+  "blackList": [
+    "/menuManage",
+    "/userPage",
+    "/menuManage34"
+  ],
+  "loginBlackList": [
+    "/login"
+  ],
+  "allHtmlList": [
+    "/index",
+    "/menuDetail",
+    "/search",
+    "/sortcook",
+    "/login",
+    "/menuManage",
+    "/userPage",
+    "/menuManage34"
+  ],
+  "sqlList": [
+    "delete from comment_info where comment_delete=1",
+    "delete from dish_info where dish_delete=1",
+    "delete from menu_dish where collection_delete=1",
+    "delete from menu_info where menu_delete=1",
+    "delete from tag_info where tag_delete=1",
+    "delete from user_info where user_delete=1"
+  ],
+  "timerArgs": "600000"
+}

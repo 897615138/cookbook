@@ -1,0 +1,38 @@
+<mapper namespace="com.dao.IMenuPopularInfoMapper">
+    <!--wzf    MenuPopular映射-->
+    <resultMap id="menuPopularInfoMapper" class="com.entity.MenuPopularInfo">
+        <result property="dishId" column="dish_id" javaType="java.lang.String"/>
+        <result property="dishLike" column="dish_like" javaType="java.lang.Integer"/>
+        <result property="dishCollect" column="dish_collect" javaType="java.lang.Integer"/>
+        <result property="dishClick" column="dish_click" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <update id="giveLike" resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        update menu_popular set dish_like=dish_like+1 where dish_id=#{dishId}
+    </update>
+
+    <update id="unLike" resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        update menu_popular set dish_like=dish_like-1 where dish_id=#{dishId}
+    </update>
+
+    <update id="collect" resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        update menu_popular set dish_collect=dish_collect+1 where dish_id=#{dishId}
+    </update>
+
+    <update id="unCollect" resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        update menu_popular set dish_collect=dish_collect-1 where dish_id=#{dishId}
+    </update>
+
+    <insert id="insertDish" resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        insert into menu_popular values(#{dishId},0,0,0)
+    </insert>
+
+    <select id="selectLikeAndCollectNumber " resultMap="menuPopularInfoMapper" parameterType="com.entity.MenuPopularInfo">
+        select dish_id,dish_like,dish_collect,dish_click from menu_popular where dish_id=#{dishId}
+    </select>
+
+    <delete id="deleteMenuPopular" resultMap="menuPopularInfoMapper" parameterType="com.entity.DishInfo">
+        delete from menu_popular where dish_id=#{dishId}
+    </delete>
+
+</mapper>

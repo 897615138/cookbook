@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="./static/css/ace.min.css" />
+    <link rel="stylesheet" type="text/css" href="./static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/css/commons.css">
+    <link rel="stylesheet" href="./static/css/bootoast.css">
+    <link rel="shortcut icon" href="./static/images/kaola.ico"  type="image/x-icon"/>
+    <style>
+        body{
+            background-image: url(static/images/bg2.jpg);
+            height: 900px;
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment:fixed;
+            background-size: cover;
+            -webkit-background-size: cover;/* 兼容Webkit内核浏览器如Chrome和Safari */
+            -o-background-size: cover;/* 兼容Opera */
+            zoom: 1;
+        }
+        li{
+            list-style: none;
+        }
+        input{
+            outline: none;
+        }
+        .nav > li > a:hover, .nav > li > a{
+            color: #fff;
+        }
+        .nav > li > a:hover, .nav > li > a:focus{
+            background-color: transparent;
+        }
+        .index:hover,.menu:hover,.loginreg:hover{
+            background-color: rgba(0,0,0,.3);
+        }
+        .row{
+            margin-right: 0;
+            margin-left: 0;
+        }
+        ul{
+            margin-right: 0;
+            margin-left: 0;
+        }
+        .picture_item ul li {
+            overflow: hidden;
+            list-style: none;
+            float: left;
+            margin-top: 15px;
+            width: 240px;
+            height: 150px;
+            background-color: #ffffff;
+
+        }
+        .picture_item li img{
+            width: 240px;
+            height: 150px;
+        }
+        .logo{
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            margin-top: 16px;
+        }
+        .logo img{
+            width: 104px;
+            height: 113px;
+            margin-left: -44px;
+        }
+        .picture_body img{
+            transition: all 0.7s;
+        }
+        .picture_body img:hover{
+            transform: scale(1.1);
+
+        }
+        /*.navbar-left li{*/
+            /*margin-right: 30px;*/
+        /*}*/
+        .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+            background-color: transparent;
+         }
+        .dropdown-menu {
+            background-color: transparent;
+        }
+        .dropdown-menu li a {
+            /*background-color: rgba(0,0,0,.5);*/
+            color: #fff;
+        }
+
+        .menulist {
+             margin-left: 0px;
+        }
+        .glyphicon{
+            top: 3px;
+        }
+        .searchdiv {
+             height: 100px;
+             margin: auto;
+         }
+        .searchdiv li{
+            float: left;
+            width: 32px;
+        }
+        .searchinput {
+            width: 480px;
+            -moz-border-radius-topright: 0!important;
+            -moz-border-radius-bottomright:0!important;
+        }
+        .bjsearch{
+            border: 0;
+            width: 108px;
+            height: 45px;
+            margin-left: 380px;
+            margin-top: 2px;
+            border-bottom-right-radius: 14px!important;
+            border-top-right-radius: 14px!important;
+            background-color: #b8f3b8;
+
+        }
+        input.form-control {
+            height: 30px;
+            border-radius: 0!important;
+            border-bottom-left-radius: 14px!important;
+            border-top-left-radius: 14px!important;
+        }
+        input{
+            border: 0;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="container-fluid main" style="position: relative;text-align: center">
+
+    <div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 1000px;margin: auto">
+        <!--左边的首页等—-->
+
+        <!--是否登录-->
+        <ul class="nav navbar-nav navbar-right " id="isLogin" style="width:15%;">
+
+        </ul>
+
+
+    </div>
+
+    <div class="logo">
+        <img src="./static/images/logo.png" alt="" >
+    </div>
+
+    <!--搜索栏-->
+   <div class="searchdiv" style="width:750px;margin: auto" >
+            <ul class="row">
+               <li style="margin-top: 10px;width: 40px"><a href="sortcook" style="font-size: 15px;width: 100px;color: #fff;text-decoration: none;">菜单</a></li>
+               <li  style=" width: 481px;margin-left: 63px;">
+                   <input type="text"  placeholder="要不搜个排骨叭~"  name="dishName" class="form-control searchinput" style="height:45px; width: 480px;"/>
+               </li>
+               <li style="margin-left: -381px;">
+                   <input type="button" class="bjsearch searchimg" value="吧唧一下">
+               </li>
+           </ul>
+
+
+   </div>
+    <div class="picture_body" style="width:750px;margin: auto"  >
+         <div class="row picture_big" style="overflow: hidden">
+             <div style="width: 750px;height: 206px;" >
+                 <img src="./static/images/big.png" alt="" style="width: 750px;height: 206px;">
+             </div>
+         </div>
+        <div class="row picture_item r1">
+            <ul >
+                <li><img src="./static/images/p1.png" alt=""></li>
+                <li class="picture_item_middle" style="margin:15px 15px 0 15px"><img src="./static/images/p2.png" alt=""></li>
+                <li><img src="./static/images/p3.png" alt=""></li>
+            </ul>
+        </div>
+        <div class="row picture_item r2" >
+            <ul >
+                <li><img src="./static/images/p4.png" alt=""></li>
+                <li class="picture_item_middle" style="margin:15px 15px 0 15px"><img src="./static/images/p5.png" alt=""></li>
+                <li><img src="./static/images/p6.png" alt=""></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script  src="./static/js/bootoast.js"></script>
+<script src="./static/js/nav.js"></script>
+<script>
+    $('.picture_body').on('click', function () {
+        setTimeout(() => {
+            window.location.href = `sortcook`
+        }, 10)
+    });
+</script>
+</body>
+</html>

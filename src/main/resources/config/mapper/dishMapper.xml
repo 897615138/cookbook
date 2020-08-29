@@ -1,0 +1,128 @@
+<mapper namespace="com.dao.IDishInfoMapper">
+    <!--已测-->
+    <resultMap id="dishInfoMap" class="com.entity.DishInfo">
+        <result property="dishId" column="dish_id" javaType="java.lang.String"/>
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="tagId" column="tag_id" javaType="java.lang.String"/>
+        <result property="dishName" column="dish_name" javaType="java.lang.String"/>
+        <result property="dishIntro" column="dish_intro" javaType="java.lang.String"/>
+        <result property="dishText" column="dish_text" javaType="java.lang.String"/>
+        <result property="dishCreateTime" column="dish_create_time" javaType="java.util.Date"/>
+        <result property="dishUpdateTime" column="dish_update_time" javaType="java.util.Date"/>
+        <result property="dishDelete" column="dish_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <select id="queryDishById" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        from dish_info
+        where dish_id=#{dishId} and dish_delete=0
+    </select>
+    <!--没有进行逻辑删除判断！-->
+    <select id="queryAllDishInfo" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        select * from dish_info
+    </select>
+
+
+    <update id="updateDish" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        update dish_info set
+        dish_id=#{dishId},user_id=#{userId},tag_id=#{tagId},dish_name=#{dishName},dish_intro=#{dishIntro},dish_text=#{dishText},dish_update_time=#{dishUpdateTime}
+        where dish_id=#{dishId} and user_id=#{userId} and dish_delete=0;
+    </update>
+
+    <insert id="insertDish" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        insert into
+        dish_info(dish_id,user_id,tag_id,dish_name,dish_intro,dish_text)values(#{dishId},#{userId},#{tagId},#{dishName},#{dishIntro},#{dishText})
+    </insert>
+    <delete id="deleteDish" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        delete from dish_info where dish_id=#{dishId} and user_id=#{userId}
+    </delete>
+
+
+    <!--zp-->
+    <update id="logicDeleteDish" resultMap="dishInfoMap" parameterType="com.entity.DishInfo">
+        update dish_info set dish_delete=1 where dish_id=#{dishId}
+    </update>
+    <!--zp星耀语句上面上面玩意????-->
+    <select id="listTagDishInfoByPageAsc" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time from(
+        select a.dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        ,dish_delete,b.dish_like,dish_collect
+        from `dish_info` a
+        join menu_popular b
+        on a.dish_id=b.dish_id
+        where if(#{id}='0',dish_delete=0,tag_id=#{id} and dish_delete=0)
+        order by #{sortord}
+        )c
+        LIMIT #{startPage},#{itemNum};
+    </select>
+    <select id="listTagDishInfoByPageSizeAsc" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time from(
+        select a.dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        ,dish_delete,b.dish_like,dish_collect
+        from `dish_info` a
+        join menu_popular b
+        on a.dish_id=b.dish_id
+        where if(#{id}='0',dish_delete=0,tag_id=#{id} and dish_delete=0)
+        order by #{sortord}
+        )c
+    </select>
+
+
+    <!--zp星耀语句上面上面玩意????-->
+    <select id="listTagDishInfoByPage" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time from(
+        select a.dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        ,dish_delete,b.dish_like,dish_collect
+        from `dish_info` a
+        join menu_popular b
+        on a.dish_id=b.dish_id
+        where if(#{id}='0',dish_delete=0,tag_id=#{id} and dish_delete=0)
+        order by
+        case
+        when #{sortord}=-7 then -(dish_create_time)
+        when #{sortord}=-10 then -(dish_like)
+        when #{sortord}=-11 then -(dish_collect)
+        end
+        )c
+        LIMIT #{startPage},#{itemNum};
+    </select>
+    <select id="listTagDishInfoByPageSize" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time from(
+        select a.dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        ,dish_delete,b.dish_like,dish_collect
+        from `dish_info` a
+        join menu_popular b
+        on a.dish_id=b.dish_id
+        where if(#{id}='0',dish_delete=0,tag_id=#{id} and dish_delete=0)
+        order by
+        case
+        when #{sortord}=-7 then -(dish_create_time)
+        when #{sortord}=-10 then -(dish_like)
+        when #{sortord}=-11 then -(dish_collect)
+        end
+        )c
+    </select>
+
+
+    <!--模糊查询-->
+    <select id="dishesSearch" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        from dish_info where dish_name like #{text} limit #{startPage},#{itemNum}
+    </select>
+    <select id="dishesSearchTotalPage" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        from dish_info where dish_name like #{text}
+    </select>
+
+    <select id="queryDishByUserId" resultMap="dishInfoMap" parameterType="com.entity.UserInfo">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        from dish_info
+        where user_id=#{userId} and dish_delete=0
+    </select>
+    <select id="queryDishByUserIdPage" resultMap="dishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select dish_id,user_id,tag_id,dish_name,dish_intro,dish_text,dish_create_time,dish_update_time
+        from dish_info
+        where user_id=#{id} and dish_delete=0 limit #{startPage},#{itemNum}
+    </select>
+</mapper>

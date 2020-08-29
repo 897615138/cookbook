@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>登录/注册界面</title>
+    <link rel="stylesheet" href="./static/css/ace.min.css" />
+    <link rel="stylesheet" type="text/css" href="./static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/css/commons.css">
+    <link rel="stylesheet" href="./static/css/bootoast.css">
+    <link rel="shortcut icon" href="./static/images/kaola.ico"  type="image/x-icon"/>
+    <link rel="stylesheet" href="./static/register/dist/css/bootstrapValidator.css">
+    <style>
+        body{
+            background-image: url(static/images/bg.jpg);
+        }
+        div.container-fluid{
+             height: 500px;
+        }
+    </style>
+</head>
+<body style="height: 500px;">
+<div class="container-fluid main" style="position: relative;">
+
+
+    <div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 1460px;margin: auto;background-color: #c7f4b7;">
+        <!--左边的首页等—-->
+        <ul class="nav navbar-nav menulist navbar-left"  >
+            <li><a href="index">首页</a></li>
+            <li><a href="sortcook">菜单</a></li>
+        </ul>
+        <!--是否登录-->
+        <ul class="nav navbar-nav navbar-right " id="isLogin" style="width:10%;">
+        </ul>
+
+        <form  class="navbar-form navbar-right" role="search">
+            <div class="form-group" style="height: 100%;margin-top: 0px">
+                <label>
+                    <input type="text" placeholder="请输入您要搜索的菜谱名称"  name="dishName" class="form-control searchinput" style="width: 224px;margin-top: 2px; border-radius: 15px!important;"/>
+                </label>
+                <a href="javascript:void (0)" style="color: #000;" >
+                    <img src="./static/images/icons/搜索.svg" alt="" class="searchimg"  >
+                </a>
+<!--                <input type="button" class="bjsearch searchimg" value="搜索">-->
+
+            </div>
+        </form>
+    </div>
+
+
+    <!--    主体-->
+    <div class="container">
+        <div class="row" style="height: 600px">
+            <!--&lt;!&ndash;&lt;!&ndash;轮播图&ndash;&gt;&ndash;&gt;-->
+            <div class="col-md-6 col-sm-4" id="picture">
+                <div id="circleContent" style=" margin-left: 44px;">
+                    <div class="carousel-inner" style="width: 600px;height: 460px;">
+                        <div class="item active">
+                            <img src="static/images/p1.png" class="img-responsive t1" alt=""/>
+                        </div>
+                        <div class="item">
+                            <img src="static/images/p2.png"  class="img-responsive t1"  alt=""/>
+                        </div>
+                        <div class="item">
+                            <img src="static/images/p3.png" class="img-responsive t1" alt=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--登录注册-->
+            <div class="col-md-6 col-sm-6" style="height: 500px">
+                <div class="login-layout" style="width: 500px;margin-left:72px">
+                    <div class="main-container" >
+                        <div class="main-content" >
+                            <div class="row" >
+                                <div class="col-sm-10 col-sm-offset-1" style="height: 400px">
+                                    <div class="login-container" style="background-color:transparent;">
+                                        <div class="position-relative" style="background-color:transparent;">
+                                            <div id="login-box" class="login-box visible widget-box no-border" style="background-color:transparent;">
+                                                <div class="widget-body" style="background-color:transparent;">
+                                                    <div class="widget-main" style="height: 454px;padding: 56px 36px 36px;">
+                                                        <h4 class="header green lighter bigger">
+                                                            <i class="ace-icon fa fa-users blue"></i>
+                                                            登录
+                                                        </h4>
+
+                                                        <form id="loginform">
+                                                            <fieldset>
+                                                                <label class="block clearfix">
+                                                                    <span>用户名/邮箱</span>
+                                                                    <span class="block input-icon input-icon-right">
+                                                                <input type="text" class="form-control userName" name="userName" placeholder="请输入用户名/邮箱" />
+                                                                <i class="ace-icon fa fa-user"></i>
+                                                                        <!--<span class="nameerror"></span>-->
+                                                                </span>
+                                                                </label>
+                                                                <div class="space-12"></div>
+                                                                <div class="space-6"></div>
+
+
+                                                                <label class="block clearfix">
+                                                                    <span>密码</span>
+                                                                    <span class="block input-icon input-icon-right">
+                                                                <input type="password" class="form-control userPassword" name="userPassword" placeholder="请输入密码"  />
+                                                                <i class="ace-icon fa fa-lock"></i>
+                                                                        <!--<span class="pwderror"></span>-->
+                                                                 </span>
+                                                                </label>
+                                                                <div class="space-12"></div>
+                                                                <div class="space-6"></div>
+
+                                                                <div class="clearfix">
+                                                                    <label class="inline">
+                                                                        <input type="checkbox">
+                                                                        <span class="lbl"> 记住密码</span>
+
+                                                                    </label>
+
+                                                                    <!--<button type="button" id="buttonlogin" class="width-35 pull-right btn btn-sm btn-primary">-->
+                                                                    <!--<i class="ace-icon fa fa-key"></i>-->
+                                                                    <!--<span class="bigger-110" >登录</span>-->
+                                                                    <!--</button>-->
+                                                                    <input type="button" id="buttonlogin" class="width-35 pull-right btn btn-sm btn-primary" value="登录">
+                                                                    <i class="ace-icon fa fa-key"></i>
+                                                                    <!--<span class="bigger-110" >登录</span>-->
+                                                                    <!--</input>-->
+                                                                </div>
+                                                                <div class="space-6"></div>
+
+                                                                <div class="space-6"></div>
+
+                                                                <div class="toolbar">
+                                                                    <div style="float: left">
+                                                                        <i class="ace-icon fa fa-arrow-left"></i>
+                                                                        <a href="#" data-target="#forgot-box" class="user-signup-link">
+                                                                            <span><img src="./static/images/icons/箭头_向左.svg" alt="" style="width: 15px;margin-bottom: 4px;"></span>
+                                                                            忘记密码
+                                                                        </a>
+                                                                    </div>
+                                                                    <div style="float: right">
+                                                                        <a href="#" data-target="#signup-box" id="login_register">
+                                                                            注册
+                                                                            <span><img src="./static/images/icons/箭头_向右.svg" alt="" style="width: 15px;margin-bottom: 4px;"></span>
+
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
+
+                                                </div><!-- /.widget-body -->
+                                            </div><!-- /.signup-box -->
+
+
+
+                                            <!--找回密码——-->
+                                            <div id="forgot-box" class="forgot-box widget-box no-border">
+                                                <div class="widget-body">
+                                                    <div class="widget-main">
+                                                        <h4 class="header red lighter bigger">
+                                                            <i class="ace-icon fa fa-key"></i>
+                                                            找回密码
+                                                        </h4>
+                                                        <form>
+                                                            <fieldset>
+                                                                请输入您的注册邮箱
+                                                                <label class="block clearfix">
+                                                                <span class="block input-icon input-icon-right">
+                                                                <input type="email" class="form-control useremail1" name="userMail" placeholder="" />
+                                                                <i class="ace-icon fa fa-envelope"></i>
+                                                                <span class="emailerror1"></span>
+                                                                </span>
+                                                                </label>
+                                                                <div class="clearfix">
+                                                                    <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                                                        <i class="ace-icon fa fa-lightbulb-o"></i>
+                                                                        <span class="bigger-110">发送验证码</span>
+                                                                    </button>
+                                                                </div>
+                                                                请输入邮箱验证码
+                                                                <label class="block clearfix">
+                                            <span class="block input-icon input-icon-right">
+                                            <input type="email" class="emailinfor form-control" name="mailCheck" placeholder="" />
+                                            <i class="ace-icon fa fa-envelope"></i>
+
+                                            <span class="emailcheckerror"></span>
+
+                                            </span>
+                                                                </label>
+                                                                <div class="toolbar center">
+                                                                    <a href="#" data-target="#login-box">
+                                                                        返回登录
+                                                                        <i class="ace-icon fa fa-arrow-right"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </fieldset>
+                                                        </form>
+                                                    </div><!-- /.widget-main -->
+
+
+                                                </div><!-- /.widget-body -->
+                                            </div><!-- /.forgot-box -->
+
+                                            <!--注册-->
+                                            <div id="signup-box" class="signup-box widget-box no-border" style="background-color:transparent">
+                                                <div class="widget-body" style="background-color:transparent">
+                                                    <div class="widget-main" style="height: 460px">
+                                                        <h4 class="header green lighter bigger">
+                                                            <i class="ace-icon fa fa-users blue"></i>
+                                                            注册
+                                                        </h4>
+                                                        <form id="registerform">
+                                                            <fieldset>
+                                                                <label class="block clearfix">
+                                                                    <span>用户名</span>
+                                                                    <span class="block input-icon input-icon-right">
+                                                                        <input type="text" class="form-control userName" id="userNameid" name="userName" placeholder="用户名的长度要在8~12位之间"  />
+                                                                        <i class="glyphicon userNametip" style="position: absolute;top: 10px;right: 10px;"></i>
+                                                                    <span id="nameerror1"></span>
+                                                                     </span>
+                                                                </label>
+                                                                <div class="space-6"></div>
+                                                                <label class="block clearfix">
+                                                                    <span>邮箱</span>
+
+                                                                    <span class="block input-icon input-icon-right">
+                                                                    <input type="email" class="form-control userMail" id="useremail1" name="userMail" placeholder="邮箱格式：xxxxx@xx.xxx" />
+                                                                        <i class="glyphicon userMailtip" style="position: absolute;top: 10px;right: 10px;"></i>
+                                                                     <span id="emailerror1"></span>
+                                                                 </span>
+
+                                                                    <!--<span class="block input-icon input-icon-right">-->
+                                                                    <!--<input type="email" class="form-control  " class="useremail1" placeholder="" />-->
+                                                                    <!--<i class="ace-icon fa fa-envelope"></i>-->
+                                                                    <!--<span class="emailerror1"></span>-->
+                                                                    <!--</span>-->
+                                                                </label>
+                                                                <div class="space-6"></div>
+
+                                                                <label class="block clearfix">
+                                                                    <span>密码</span>
+                                                                    <span class="block input-icon input-icon-right">
+                                                                <input type="password" class="form-control userPassword" id="userPasswordid" name="userPassword" placeholder="密码的长度要在8~12位之间" />
+                                                                        <i class="glyphicon userPasswordtip" style="position: absolute;top: 10px;right: 10px;"></i>
+                                                                    <span class="pwderror"></span>
+
+                                                            </span>
+                                                                </label>
+                                                                <div class="space-6"></div>
+
+                                                                <label class="block clearfix">
+                                                                    <span>确认密码</span>
+                                                                    <span class="block input-icon input-icon-right">
+                                                                <input type="password" class="form-control"  id="repasswordid" placeholder="与密码一致" />
+                                                                        <i class="glyphicon userRePasswordtip" style="position: absolute;top: 10px;right: 10px;"></i>
+                                                                     <span class="repwderror"></span>
+
+                                                            </span>
+                                                                </label>
+                                                                <div class="space-12"></div>
+
+                                                                <label class="block agree">
+                                                                    <input type="checkbox" class="checkboxinfo" />
+                                                                    <span class="lbl">
+                                                                接受
+                                                                <a href="#" data-toggle="modal" data-target="#new">《用户协议》</a>
+                                                                 </span>
+                                                                </label>
+                                                                <div class="toolbar">
+                                                                    <div style="float: left">
+                                                                        <i class="ace-icon fa fa-arrow-left"></i>
+                                                                        <a href="#" data-target="#login-box" class="user-signup-link">
+                                                                            <span><img src="./static/images/icons/箭头_向左.svg" alt="" style="width: 15px;margin-bottom: 4px;"></span>
+                                                                            返回登录
+                                                                        </a>
+                                                                    </div>
+                                                                    <div style="float: right">
+                                                                        <!--<a href="javascript:void(0)" data-target="#signup-box"  id="signup-button">-->
+                                                                        <!--注册-->
+                                                                        <!--<span><img src="/static/images/icons/箭头_向右.svg" alt="" style="width: 15px;margin-bottom: 4px;"></span>-->
+                                                                        <!--</a>-->
+                                                                        <input type="button" id="signup-button" value="注册" style="border: 0;color:#007CB7;background-color:transparent; font-size: 15px;font-weight: 400;text-shadow: 1px 0 1px rgba(0,0,0,.25);" >
+                                                                        <span><img src="./static/images/icons/箭头_向右.svg" alt="" style="width: 15px;margin-bottom: 4px;"></span>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
+
+
+                                                </div><!-- /.widget-body -->
+                                            </div><!-- /.signup-box -->
+
+
+                                        </div><!-- /.position-relative -->
+
+                                    </div><!-- /.row -->
+                                </div><!-- /.main-content -->
+                            </div><!-- /.main-container -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="height: 100px;">
+            <div class="footer" style="bottom: 0">
+                <div class="row">
+                    <div class="col-md-1 col-sm-3" style="height: 100px;"></div>
+                    <div class="col-md-1 col-sm-3" style="height: 100px;width: 100px">
+                        <img src="./static/images/logo.png" alt="这是一个logo" style=" width: 74px; height: 88px; margin-top: 26px;margin-left: 19px">
+                    </div>
+                    <div class="col-md-5 col-sm-6" style="height: 100px;">
+                        <p class="footer_link">网站首页&nbsp;&nbsp;&nbsp;帮助中心&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;客户服务&nbsp;&nbsp;&nbsp;隐私政策
+                            &nbsp;&nbsp;&nbsp;意见反馈</p>
+                        <p>Copyright © 2020SUMMER All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="height: 100px;"></div>
+
+                    <div class="col-md-3 col-sm-4" style="height: 100px;">
+                        <img class="pic qq" src="./static/images/share/QQ.svg" alt="QQ">
+                        <img class="pic" src="./static/images/share/wechat.svg" alt="wechat">
+                        <img class="pic" src="./static/images/share/blog.svg" alt="blog">
+                    </div>
+                    <div class="col-md-2 col-sm-1"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="new">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"> 用户隐私和服务条款 </div>
+                <form class="form-horizontal">
+                    <div class="modal-body">
+                        <h4 class="text-center">用户隐私和服务条款</h4>
+                        <h6>一、总则</h6>
+                        <p>
+                            1.1　用户应当同意本协议的条款并按照页面上的提示完成全部的注册程序。用户在进行注册程序过程中勾选"我已阅读并接受"模块即表示用户与产品名称达成协议，完全接受本协议项下的全部条款。
+                        </p>
+                        <p>
+                            1.2　用户注册成功后，产品名称将给予每个用户一个用户帐号及相应的密码，该用户帐号和密码由用户负责保管；用户应当对以其用户帐号进行的所有活动和事件负法律责任。</p>
+                        <p>
+                            1.3　用户可以使用产品名称各个频道单项服务，当用户使用产品名称各单项服务时，用户的使用行为视为其对该单项服务的服务条款以及产品名称在该单项服务中发出的各类公告的同意。
+                        </p>
+                        <h6>二、注册信息和隐私保护</h6>
+                        <p>2.1　产品名称帐号（即产品名称用户ID）的所有权归产品名称，用户完成注册申请后，获得产品名称帐号的使用权。所有原始键入的资料将引用为注册资料。如果因注册信息不真实而引起的问题，并对问题发生所带来的后果，产品名称不负任何责任。</p>
+
+                        <p>2.2　用户不应将其帐号、密码转让或出借予他人使用。如用户发现其帐号遭他人非法使用，应立即通知产品名称。因黑客行为或用户的保管疏忽导致帐号、密码遭他人非法使用，产品名称不承担任何责任。</p>
+
+                        <p>2.3　在您注册产品名称，使用其他产品名称产品或服务，访问产品名称网页时，产品名称会收集您的个人身份识别资料，并会将这些资料用于：改进为你提供的服务及网页内容。</p>
+
+                        <h6>三、使用规则</h6>
+                        <p>3.1　用户在使用产品名称服务时，必须遵守中华人民共和国相关法律法规的规定，用户应同意将不会利用本服务进行任何违法或不正当的活动，包括但不限于下列行为∶
+
+                        <p>3.2　用户违反本协议或相关的服务条款的规定，导致或产生的任何第三方主张的任何索赔、要求或损失，包括合理的律师费，您同意赔偿数据堂与合作公司、关联公司，并使之免受损害。对此，产品名称有权视用户的行为性质，采取包括但不限于删除用户发布信息内容、暂停使用许可、终止服务、限制使用、回收产品名称帐号、追究法律责任等措施。对恶意注册产品名称帐号或利用产品名称帐号进行违法活动、捣乱、骚扰、欺骗、其他用户以及其他违反本协议的行为，产品名称有权回收其帐号。同时，产品名称会视司法部门的要求，协助调查。</p>
+
+                        <p>3.3　用户不得对本服务任何部分或本服务之使用或获得，进行复制、拷贝、出售、转售或用于任何其它商业目的。</p>
+
+                        <p>3.4　用户须对自己在使用产品名称服务过程中的行为承担法律责任。用户承担法律责任的形式包括但不限于：对受到侵害者进行赔偿，以及在产品名称首先承担了因用户行为导致的行政处罚或侵权损害赔偿责任后，用户应给予产品名称等额的赔偿。</p>
+
+                        <h6>四、服务内容</h6>
+
+                        <p>4.1　产品名称网络服务的具体内容由产品名称根据实际情况提供。</p>
+
+                        <p>4.2　除非您与产品名称另有约定，您同意本服务仅为您个人非商业性质的使用。</p>
+
+                        <p>4.3　产品名称的部分服务是以收费方式提供的，如您使用收费服务，请遵守相关的协议。</p>
+
+                        <p>4.4　产品名称可能根据实际需要对收费服务的收费标准、方式进行修改和变更，产品名称也可能会对部分免费服务开始收费。前述修改、变更或开始收费前，产品名称将在相应服务页面进行通知或公告。如果您不同意上述修改、变更或付费内容，则应停止使用该服务。</p>
+
+
+                        <h6>五、知识产权和其他合法权益（包括但不限于名誉权、商誉权）</h6>
+
+                        <p>5.1　产品名称在本服务中提供的内容（包括但不限于网页、文字、图片、音频、视频、图表等）的知识产权归产品名称所有，用户在使用本服务中所产生的内容的知识产权归用户或相关权利人所有。</p>
+
+                        <p>5.2 除另有特别声明外，产品名称提供本服务时所依托软件的著作权、专利权及其他知识产权均归产品名称所有。</p>
+
+                        <p>5.3 产品名称在本服务中所使用的“产品名称”等商业标识，其著作权或商标权归产品名称所有。</p>
+
+                        <p>5.4 上述及其他任何本服务包含的内容的知识产权均受到法律保护，未经产品名称、用户或相关权利人书面许可，任何人不得以任何形式进行使用或创造相关衍生作品。</p>
+
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <!--<button class="btn btn-success" type="submit">提交</button>-->
+                    <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--</div>-->
+</div>
+<script type="text/javascript" src="./static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script  src="./static/js/bootoast.js"></script>
+<script src="./static/js/login.js"></script>
+<script src="./static/js/nav.js"></script>
+<script src="./static/register/dist/js/bootstrapValidator.js"></script>
+
+<script>
+    $('#picture').on('click', function () {
+        setTimeout(() => {
+            window.location.href = `sortcook`
+        }, 10)
+    });
+</script>
+</body>
+</html>

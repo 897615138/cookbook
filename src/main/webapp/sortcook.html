@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CookBook</title>
+    <link rel="stylesheet" href="./static/css/ace.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./static/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./static/css/commons.css">
+
+     <style>
+
+        html{overflow-x:hidden; overflow-y:auto;}
+
+         .menu-container {
+             width: 770px;
+             height: 587px;
+             padding-top: 25px;
+             display: flex;
+             flex-wrap: wrap;
+         }
+
+        .item {
+            width: 180px;
+            height: 250px;
+            text-align: center;
+            font-size: 12px;
+            margin: 0 0 50px 50px;
+        }
+
+        .menu-banner {
+            position: relative;
+            margin-bottom: 10px;
+            width: 200px;
+            height: 250px;
+
+            background-size: cover;
+        }
+
+        .menu-info {
+            position: absolute;
+            top: 150px;
+            width:200px;
+
+            left: 0;
+        }
+        /*body{*/
+        /*    background-image: url(static/images/bg2.jpg);}*/
+
+        .menu-discuss {
+            margin-right: 20px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 25%;
+            margin: 0 auto 8px;
+        }
+
+
+        /* 包裹标签栏所有 */
+        .classers {
+            /* padding: 2.5px; */
+            margin-top: 50px;
+            width: 240px;
+            height: 79px;
+            position: absolute;
+        }
+
+        /* 左侧8大菜系 */
+        table {
+            position: absolute;
+            top: 0;
+
+        }
+
+
+
+        .table td {
+
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        /* 下拉菜单 */
+        .classs {
+            position: absolute;
+            top: 10px;
+            left: 380px;
+        }
+
+        /* 缩列图 */
+        .thumbnail {
+            height: 330px;
+            width: 300px;
+            position: relative;
+            top: 0px;
+            left: 300px;
+        }
+
+
+        .ud{
+           position: absolute;
+            left: 270px;
+            top: 50px;
+        }
+
+         img{
+             transition: all 0.7s;
+         }
+         img:hover{
+             transform: scale(1.1);
+
+         }
+
+        .dropdown-menu {
+            background-color: transparent;
+
+        }
+
+        .dropdown-menu li a {
+            /* background-color: rgba(0,0,0,.5); */
+            color: #fff;
+        }
+
+
+
+</style>
+
+</head>
+<body>
+<div class="container-fluid main" style="position: relative;">
+    <div class="collapse navbar-collapse" id="example-navbar-collapse" style="width: 1460px;margin: auto;background-color: #c7f4b7;">
+        <ul class="nav navbar-nav menulist navbar-left"  >
+            <li><a href="index">首页</a></li>
+            <li><a href="sortcook">菜单</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right " id="isLogin" style="width:10%;">
+        </ul>
+        <form  class="navbar-form navbar-right" role="search">
+            <div class="form-group" style="height: 100%;margin-top: 0px">
+                <label>
+                    <input type="text" placeholder="请输入您要搜索的菜谱名称"  name="dishName" class="form-control searchinput" style="width: 224px;margin-top: 2px; border-radius: 15px!important;"/>
+                </label>
+                <a href="javascript:void(0)" style="color: #000;" >
+                    <img  src="./static/images/icons/搜索.svg" alt="" class="searchimg"  >
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="container" style="position: relative;">
+       <div class="row" style="height: 704px;">
+           <div class="all">
+               <div class="classers">
+                   <table class="table table-hover" name="regTable" value="0" style="border: white 0 solid;margin-left: 89px;">
+                   </table>
+               </div>
+               <div   style=" position: absolute;top: 17px;left: 984px;width: 100px;" name="sortt" value="asc">
+                   <button id="up" name="sort" style="width: 60px;height: 35px;border-radius: 17px;display: block;background-color: rgba(224, 234, 255, 0.73) !important ;   border: 0;">升序</button>
+                   <button id="down" name="sort" style="width: 60px;height: 35px;border-radius: 17px;display: none;background-color: rgba(224, 234, 255, 0.73) !important ;  border: 0;">降序</button>
+               </div>
+               <div class="row" style="position: absolute;top: 600px;left: 610px">
+                   <ul class="pagination" id="menuPage">
+                   </ul>
+               </div>
+               <div class="ud">
+                   <div class="menu-container" id="regTa" style="margin-left: 100px">
+                   </div>
+               </div>
+               <div class="dropdown classs container" style="margin-left: 502px;margin-top: 8px;width: 100px;">
+                   <label for="sel"></label>
+                   <select name="" id="sel" style="left: 516px;top: 9px;">
+                       <option class="sortcook" value="7">时间</option>
+                       <option class="sortcook" value="11">收藏</option>
+                       <option class="sortcook" value="10">点赞</option>
+                   </select>
+               </div>
+           </div>
+       </div>
+        <div class="row" style="height: 100px;">
+            <div class="footer" style="bottom: 0">
+                <div class="row">
+                    <div class="col-md-1 col-sm-3" style="height: 100px;"></div>
+                    <div class="col-md-1 col-sm-3" style="height: 100px;width: 100px">
+                        <img  src="./static/images/logo.png" alt="这是一个logo" style=" width: 74px; height: 88px; margin-top: 28px;margin-left: 19px">
+                    </div>
+                    <div class="col-md-5 col-sm-6" style="height: 100px;">
+                        <p class="footer_link">网站首页&nbsp;&nbsp;&nbsp;帮助中心&nbsp;&nbsp;&nbsp;联系我们&nbsp;&nbsp;&nbsp;客户服务&nbsp;&nbsp;&nbsp;隐私政策
+                            &nbsp;&nbsp;&nbsp;意见反馈</p>
+                        <p>Copyright © 2020SUMMER All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-1 col-sm-1" style="height: 100px;"></div>
+                    <div class="col-md-3 col-sm-4" style="height: 100px;    margin-top: 24px;">
+                        <img class="pic qq"  src="./static/images/share/QQ.svg" alt="QQ">
+                        <img class="pic"  src="./static/images/share/wechat.svg" alt="wechat">
+                        <img class="pic"  src="./static/images/share/blog.svg" alt="blog">
+                    </div>
+                    <div class="col-md-2 col-sm-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="./static/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="./static/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+<script  src="./static/js/nav.js"></script>
+<script>
+    let id = '0';
+    let updo = '-';
+    let type = $('.sortcook').val();
+    let sortord = '7';
+    let currPage=1
+    $(function () {
+        init();
+        throttling()
+    });
+        function dateFormat(date) {
+            const d = new Date(date);
+            return `${d.getFullYear()}-${d.getMonth() < 10 ? ('0' + d.getMonth()) : d.getMonth()}-${d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate()} ${d.getHours() < 10 ? ('0' + d.getHours()) : d.getHours()}:${d.getMinutes() < 10 ? ('0' + d.getMinutes()) : d.getMinutes()}:${d.getSeconds() < 10 ? ('0' + d.getSeconds()) : d.getSeconds()}`
+        }
+        $('#sel').change(function () {
+            $('.aaa').find('li').eq($(this).val()-1).addClass('cur').siblings().removeClass('cur')
+        })
+        $('[name=regTable]').on('mouseover','.cookStyle',function (){
+            $("[data-toggle='popover']").popover();
+        })
+    $('#menuPage').on('click','.page',function () {
+        currPage = this.dataset.currPage
+        throttling()
+    })
+        function init() {
+            let curr = ''
+            $.ajax({
+                url: 'tags/list',
+                method: 'post',
+                dataType: 'JSON',
+                success(data) {
+                    data.data.forEach(el => {
+                        const {tagIntro, tagId, tagName} = el;
+                        curr += `
+                 <tr><td style="border: white 0 solid">
+                    <div>
+                        <button  style="position: relative;width: 80%;height: 50px;background-color:#c1fcffb3 !important;border-radius: 10px;margin: 5px;border-color: #fff !important;" class="btn btn-default cookStyle" value="${tagId}" type="button" data-container="body" data-toggle="popover" data-trigger="hover" data-placement="left" data-content="${tagIntro}">
+                            <span style="color: #000">${tagName}</span>
+                        </button>
+                    </div>
+                </td></tr>
+                                  `
+                        $('[name=regTable]').empty().html(curr)
+                    })
+                }
+            })
+        }
+    $(document).on('click','.cookStyle',function () {
+        id=$(this).val()
+        throttling()
+    })
+    $('[name=sort]').on('click',function () {
+        $('#up').css('display',$('#up').css('display') ==='block'?'none':'block');
+        $('#down').css('display',$('#down').css('display') ==='block'?'none':'block');
+        updo = updo==='-'?'':'-';
+        throttling()
+    })
+    $('.sortcook').on('click',function (){
+        type=$(this).val()
+        throttling()
+    })
+            window.onload = function () {
+                let show = ''
+                $.ajax({
+                    url: 'users/getLoginUser',
+                    method: 'GET',
+                    dataType: 'JSON',
+                    success(data) {
+                        //如果已经登录的话
+                        if (data.result) {
+                            show = `<li class="dropdown loginlist" id="userInfo" style="width: 120px;">
+                        <a href="#" style="position:relative;border-bottom: 5px solid transparent;padding-right: 90px;" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span><span style="margin-top: 10px;position:absolute;top:10px;width:100px">${data.t.userName}<b class="caret"></b></span>
+                        </a>
+                         <ul class="dropdown-menu" style="position: absolute; left: -1px;  background-color: #0000004d;">
+                            <li style="border-bottom: 0 solid #fff;"><a href="userPage" style="color: #fff">个人中心</a></li>
+
+                            <li style="border-bottom: 0 solid #fff;"><a href="menuManage" style="color: #fff">发布菜谱</a></li>
+
+                            <li style="border-bottom: 0 solid #fff;"><a href="index" id="logout" style="color: #fff">退出登录</a></li>
+                        </ul>
+                    </li>`
+                        } else {
+                            show = `   <li><a href="login">登录/注册</a></li>     `
+                        }
+                        $('#isLogin').empty().html(show)
+                    }
+                })
+            }
+            $('#isLogin').on('click','#logout',function () {
+                $.ajax({
+                    url:'users/logout',
+                    dataType:'JSON',
+                    success(data){
+                        if(data.result){
+
+                            toast(data.msg+" 3秒之后自动跳转",'success')
+                            setTimeout(
+                                function () {
+                                    window.location.href="index"
+                                },3000)
+
+                        }else {
+                            setTimeout(toast(data.msg))
+                        }
+                    }
+                })
+            })
+
+    let timeout;
+    function throttling(){
+        //先清理
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
+            sortord= updo+type;
+            $.ajax({
+                url: 'dishes/sort',
+                method: 'POST',
+                data: {id,sortord,currPage},
+                dataType:'JSON',
+                success(data) {
+
+
+                    let content = ''
+
+                    if (data.result) {
+                        data.data.forEach(el => {
+                            const {dishCreateTime, userId, picturesInfoList, dishIntro, dishName} = el;
+                            if (picturesInfoList !== undefined) {
+                                const {picAddress} = picturesInfoList[0];
+                                content += ` <div class="item wx">
+                            <div class="menu-banner">
+                            <a href="menuDetail?dishId=${el.dishId}"><img src="${picAddress}" alt="数据库没图给你们看" style=" width: 200px;height: 140px;top: 0;position: absolute;left: 0" ></a>
+                                    <div class="menu-info" style="overflow:hidden;text-overflow:ellipsis;word-break:keep-all;white-space:nowrap;">
+                                        <a href="menuDetail?dishId=${el.dishId}">文章名:${dishName}</a>  <a href="">作者:${userId}</a>
+                                         <br>
+                                        时间: ${dateFormat(dishCreateTime)}
+                                        <br>
+                                        简介    ${dishIntro}
+                                        <br>
+            <span>点赞:${el.likeNumber}</span>   <span>收藏:${el.collectNumber}</span>
+                                </div>
+                            </div>
+                        </div>`
+
+                                $('#regTa').empty().html(content)
+
+                            } else {
+                                content += ` <div class="item wx">
+                            <div class="menu-banner">
+                            <a href="menuDetail?dishId=${el.dishId}"><img src="" alt="数据库没图给你们看" style=" width: 200px;height: 140px;top: 0;position: absolute;left: 0" ></a>
+                                    <div class="menu-info" style="overflow:hidden;text-overflow:ellipsis;word-break:keep-all;white-space:nowrap;">
+                                        <a href="menuDetail?dishId=${el.dishId}">文章名:${dishName}</a>  <a href="">作者:${userId}</a>
+                                         <br>
+                                        时间: ${dateFormat(dishCreateTime)}
+                                        <br>
+                                        简介    ${dishIntro}
+                                        <br>
+<span>点赞:${el.likeNumber}</span>   <span>收藏:${el.collectNumber}</span>
+                                </div>
+                            </div>
+                        </div>`
+                                $('#regTa').empty().html(content)
+
+                            }
+                        })
+                        let t = data.page.totalPage
+
+                        const {totalPage, currPage} = data.page;
+                        let pag = `    <li><a href="javascript:"
+                                       data-curr-page="${currPage - 1 > 0 ? currPage - 1 : 1}"
+                                       class="page">&laquo;</a></li>
+				                <li><a href="javascript:" data-curr-page="1" class="page">首页</a></li>
+                                <li><a href="" readonly="true" data-curr-page="">当前第
+                                    <sapn>${currPage} 总页数:${totalPage}</sapn>
+                                    页</a></li>
+                                <li><a href="javascript:" data-curr-page="${totalPage}"
+                                       class="page">尾页</a></li>
+									    <li><a href="javascript:"
+                                       data-curr-page="${1 + currPage > totalPage ? totalPage : 1 + currPage}"
+                                       class="page">&raquo;</a></li>
+ `
+                        $('#menuPage').empty().html(pag)
+                    }else{
+                        $('#regTa').empty()
+                        $('#menuPage').empty()
+                    }
+
+
+                }
+            })}, 200)
+    }
+
+
+</script>
+</body>
+</html>

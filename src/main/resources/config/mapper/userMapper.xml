@@ -1,0 +1,58 @@
+<mapper namespace="com.dao.IUserInfoMapper">
+    <!--对应的类与表的映射-->          <!--已测-->
+    <resultMap id="userInfoMap" class="com.entity.UserInfo">
+        <result property="userId" column="user_id" javaType="java.lang.String"/>
+        <result property="userName" column="user_name" javaType="java.lang.String"/>
+        <result property="userNickname" column="user_nickname" javaType="java.lang.String"/>
+        <result property="userPassword" column="user_password" javaType="java.lang.String"/>
+        <result property="userMail" column="user_mail" javaType="java.lang.String"/>
+        <result property="userPicture" column="user_picture" javaType="java.lang.String"/>
+        <result property="userCreateTime" column="user_create_time" javaType="java.util.Date"/>
+        <result property="userUpdateTime" column="user_update_time" javaType="java.util.Date"/>
+        <result property="userDelete" column="user_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <!-- MapperStatement -->
+    <select id="loginByMany" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        select
+        user_id,user_name,user_nickname,user_password,user_mail,user_picture,user_create_time,user_update_time,user_delete
+        from user_info where (user_name=#{userName} or user_mail=#{userMail}) and
+        user_password=#{userPassword} and user_delete=0
+    </select>
+
+    <insert id="register" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        insert into
+        user_info(user_id,user_name,user_nickname,user_password,user_mail,user_picture)
+        select #{userId},#{userName},"快来修改昵称吧~",#{userPassword},#{userMail},"./static/images/logo.png"
+        where not exists (select * from user_info where (user_name=#{userName} or user_mail=#{userMail}) and user_delete=0)
+    </insert>
+
+    <select id="getUserById" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        select
+        user_id,user_name,user_nickname,user_password,user_mail,user_picture,user_create_time,user_update_time,user_delete
+        from user_info where user_id=#{userId} and user_delete=0
+    </select>
+
+    <update id="updateUser" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        update user_info set
+        user_nickname=#{userNickname},user_password=#{userPassword},user_mail=#{userMail},user_picture=#{userPicture},user_update_time=#{userUpdateTime}
+        where user_id=#{userId} and user_delete=0
+    </update>
+
+    <select id="selectUserByName" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        select
+        user_id,user_name,user_nickname,user_password,user_mail,user_picture,user_create_time,user_update_time,user_delete
+        from user_info where user_name=#{userName} and user_delete=0
+    </select>
+
+    <select id="selectUserByMail" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        select
+        user_id,user_name,user_nickname,user_password,user_mail,user_picture,user_create_time,user_update_time,user_delete
+        from user_Info where user_mail=#{userMail} and user_delete=0
+    </select>
+
+    <update id="deleteUser" resultMap="userInfoMap" parameterType="com.entity.UserInfo">
+        update user_info set user_delete=1
+    </update>
+</mapper>

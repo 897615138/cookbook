@@ -1,0 +1,47 @@
+<mapper namespace="com.dao.IMenuDishInfoMapper">
+    <!--wzf    MenuDish映射-->
+    <resultMap id="menuDishInfoMap" class="com.entity.MenuDishInfo">
+        <result property="menuId" column="menu_id" javaType="java.lang.String"/>
+        <result property="dishId" column="dish_id" javaType="java.lang.String"/>
+        <result property="collectionTime" column="collection_time" javaType="java.util.Date"/>
+        <result property="collectionDelete" column="collection_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+
+    <!--根据收藏夹id查询所有的菜谱id-->
+    <select id="queryAllDishId" resultMap="menuDishInfoMap" parameterType="com.entity.MenuDishInfo">
+        select * from menu_dish where menu_id=#{menuId} and collection_delete=0
+    </select>
+
+    <!--增加菜谱id-->
+    <insert id="increaseDishId" resultMap="menuDishInfoMap" parameterType="com.entity.MenuDishInfo">
+        insert into menu_dish(menu_id,dish_id) values(#{menuId},#{dishId})
+    </insert>
+
+    <!--删除菜谱id-->
+    <update id="deleteDishId" resultMap="menuDishInfoMap" parameterType="com.entity.MenuDishInfo">
+        update menu_dish set collection_delete=1 where dish_id=#{dishId}
+    </update>
+
+    <!--根据收藏夹id和菜谱id删除指定菜谱-->
+    <update id="deleteMenuDish" resultMap="menuDishInfoMap" parameterType="com.entity.MenuDishInfo">
+        update menu_dish set collection_delete=1 where dish_id=#{dishId} and menu_id=#{menuId}
+    </update>
+
+    <!--根据菜谱id分页查出dish_id-->
+    <select id="getMenuContentById" resultMap="menuDishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select menu_id, dish_id from menu_dish where menu_id=#{id} and collection_delete=0 limit #{startPage},#{itemNum}
+    </select>
+
+    <select id="getMenuContentByIdTotalPage" resultMap="menuDishInfoMap" parameterType="com.utils.PageSqlUtil">
+        select menu_id, dish_id from menu_dish where menu_id=#{id} and collection_delete=0
+    </select>
+
+
+    <!--不存在就插入-->
+    <insert id="menuDishCollect" resultMap="menuDishInfoMap" parameterType="com.entity.MenuDishInfo">
+        insert into menu_dish(menu_id,dish_id)
+        select #{menuId},#{dishId}
+        where not EXISTS (select * from menu_dish where menu_id=#{menuId} and dish_id=#{dishId})
+    </insert>
+</mapper>
